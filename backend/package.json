@@ -16,6 +16,7 @@
     "nodemon": "^3.1.0"
   },
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -27,6 +28,7 @@
     "http-errors": "^2.0.0",
     "mongoose": "^8.2.1",
     "trim-request": "^1.0.6",
+    "validator": "^13.11.0",
     "winston": "^3.12.0"
   }
 }
