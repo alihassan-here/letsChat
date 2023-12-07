@@ -24,13 +24,13 @@ export const register = async (req, res, next) => {
         });
         res.json({
             message: "register successfully",
-            access_token: accessToken,
             user: {
                 _id: newUser._id,
                 name: newUser.name,
                 email: newUser.email,
                 picture: newUser.picture,
-                status: newUser.status
+                status: newUser.status,
+                access_token: accessToken,
             }
         });
 
@@ -51,13 +51,13 @@ export const login = async (req, res, next) => {
         });
         res.json({
             message: "login successfully",
-            access_token: accessToken,
             user: {
                 _id: user._id,
                 name: user.name,
                 email: user.email,
                 picture: user.picture,
-                status: user.status
+                status: user.status,
+                access_token: accessToken,
             }
         });
     } catch (error) {
@@ -83,13 +83,13 @@ export const refreshToken = async (req, res, next) => {
         const user = await findUser(check.userId);
         const accessToken = await generateToken({ userId: user._id }, "1d", ACCESS_TOKEN_SECRET);
         res.json({
-            access_token: accessToken,
             user: {
                 _id: user._id,
                 name: user.name,
                 email: user.email,
                 picture: user.picture,
-                status: user.status
+                status: user.status,
+                access_token: accessToken,
             }
         });
     } catch (error) {
