@@ -32,7 +32,8 @@ const RegisterForm = () => {
         } else {
             res = await dispatch(registerUser({ ...data }));
         }
-        if (res?.payload?.user) navigate("/");
+        console.log(res);
+        if (Object.keys(res?.payload?.user).length > 0) navigate("/");
     };
     const uploadImage = async () => {
         let formData = new FormData();

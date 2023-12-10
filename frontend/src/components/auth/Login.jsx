@@ -1,17 +1,14 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from "react-router-dom";
 import PulseLoader from "react-spinners/PulseLoader";
+import { loginUser, } from "../../features/userSlice";
 import { signInSchema } from "../../utils/validation";
 import AuthInput from './AuthInput';
-import { loginUser, } from "../../features/userSlice";
 const SignIn = () => {
 
     const { status, error } = useSelector((state) => state.user);
-    const [picture, setPicture] = useState("");
-    const [readablePicture, setReadablePicture] = useState("");
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { register, handleSubmit, watch, formState: { errors } } = useForm({
@@ -19,6 +16,7 @@ const SignIn = () => {
     });
     const onSubmit = async (data) => {
         let res = await dispatch(loginUser({ ...data }));
+        console.log(res);
         if (res?.payload?.user) navigate("/");
     };
     return (
