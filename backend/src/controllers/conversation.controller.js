@@ -3,13 +3,16 @@ import logger from "../configs/logger.config.js";
 import {
     createConversation,
     doesConversationExist,
+    getUserConversations,
     populateConversation
 } from "../services/conversation.service.js";
+import { findUser } from "../services/user.service.js";
 
 export const create_open_conversation = async (req, res, next) => {
     try {
         const sender_id = req.user.userId;
         const { receiver_id, isGroup } = req.body;
+        console.log(receiver_id);
         if (isGroup == false) {
             //check if receiver_id is provided
             if (!receiver_id) {
@@ -27,10 +30,10 @@ export const create_open_conversation = async (req, res, next) => {
             if (existed_conversation) {
                 res.json(existed_conversation);
             } else {
-                // let receiver_user = await findUser(receiver_id);
+                let receiver_user = await findUser(receiver_id);
                 let convoData = {
-                    name: "conversation name",
-                    picture: "conversation picture",
+                    name: receiver_user.name,
+                    picture: 'https://res.cloudinary.com/dkd5jblv5/image/upload/v1675976806/Default_ProfilePicture_gjngnb.png',
                     isGroup: false,
                     users: [sender_id, receiver_id],
                 };
@@ -55,5 +58,15 @@ export const create_open_conversation = async (req, res, next) => {
         }
     } catch (error) {
         next(error);
+    }
+}
+
+export const getConversation = async (req, res, next) => {
+    try {
+        const user_id = req.user.userId;
+        const conversations = await getUserConversations(user_id);
+        res.status(200).json(conversations);
+    } catch (error) {
+
     }
 }
