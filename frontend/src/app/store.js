@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import storage from "redux-persist/lib/storage";
 import createFilter from "redux-persist-transform-filter";
 import userReducer from "../features/userSlice";
+import chatReducer from "../features/chatSlice";
 import { persistReducer, persistStore } from "redux-persist";
 
 
@@ -15,7 +16,8 @@ const persistConfig = {
     transforms: [saveUserOnlyFilter]
 }
 const rootReducer = combineReducers({
-    user: userReducer
+    user: userReducer,
+    chat: chatReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
