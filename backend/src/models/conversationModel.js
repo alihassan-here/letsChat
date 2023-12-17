@@ -9,7 +9,7 @@ const conversationSchema = mongoose.Schema(
         },
         picture: {
             type: String,
-            required: true,
+            default: "https://res.cloudinary.com/dkd5jblv5/image/upload/v1675976806/Default_ProfilePicture_gjngnb.png"
         },
         isGroup: {
             type: Boolean,

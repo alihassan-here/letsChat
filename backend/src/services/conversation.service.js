@@ -66,8 +66,8 @@ export const populateConversation = async (
 };
 
 export const getUserConversations = async (user_id) => {
-    let conversations;
-    await ConversationModel.findOne({ users: { $elemMatch: { $eq: user_id } } }).populate("users", "-password").populate("admin", "-password").populate("latestMessage").sort({ updatedAt: -1 }).then(async results => {
+    let conversations = [];
+    await ConversationModel.find({ users: { $elemMatch: { $eq: user_id } } }).populate("users", "-password").populate("admin", "-password").populate("latestMessage").sort({ updatedAt: -1 }).then(async results => {
         results = await UserModel.populate(results, {
             path: "latestMessage.sender",
             select: "name email picture status"

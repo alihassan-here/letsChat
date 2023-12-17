@@ -33,7 +33,7 @@ export const create_open_conversation = async (req, res, next) => {
                 let receiver_user = await findUser(receiver_id);
                 let convoData = {
                     name: receiver_user.name,
-                    picture: 'https://res.cloudinary.com/dkd5jblv5/image/upload/v1675976806/Default_ProfilePicture_gjngnb.png',
+                    picture: receiver_user.picture,
                     isGroup: false,
                     users: [sender_id, receiver_id],
                 };
